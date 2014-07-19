@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+1821aaee3b8cd61630a14665f245f733 CMakeFiles/uninstall
+2c5557f3127ced847470e5d5acb2270c src/CMakeFiles/blogmanagement_automoc
+cd6f3b64a74efc322c6ae437261d2f4a src/settings.h
+c83315301e5ae9924e7dff5daf8bf32e src/ui_blogmanagementview_base.h
+bbd47e6360873fd87203048f83807013 src/ui_mainwindow_base.h
+187bf8f3746dde3471cbb2f3ae98dd7b src/ui_prefs_base.h

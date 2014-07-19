@@ -1,0 +1,43 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x1c\x00b\x00l\x00o\x00g\x00m\x00a\x00n\x00a\x00g\x00e\x00m\x00e\x00n\x00t)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index=0
+ProjectRootRelative=./
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=file:///home/cassio/projects/BlogManagement/blogmanagement/build
+Build Type=Debug
+CMake Binary=file:///usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=file:///usr/local
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=blogmanagement
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x03\x00\x00\x00\x1c\x00b\x00l\x00o\x00g\x00m\x00a\x00n\x00a\x00g\x00e\x00m\x00e\x00n\x00t\x00\x00\x00\x06\x00s\x00r\x00c\x00\x00\x00\x1c\x00b\x00l\x00o\x00g\x00m\x00a\x00n\x00a\x00g\x00e\x00m\x00e\x00n\x00t)
+Dependency Action=Build
+EnvironmentGroup=default
+Executable=file:///home/cassio/projects/BlogManagement/blogmanagement/
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=blogmanagement,src,blogmanagement
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[MakeBuilder]
+Install As Root=true
+Su Command=1
+
+[SourceFileTemplates]
+LastUsedTemplate=/home/cassio/.kde/share/apps/kdevfiletemplates/template_descriptions/cpp_basic.desktop
