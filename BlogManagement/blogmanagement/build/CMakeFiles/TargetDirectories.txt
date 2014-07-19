@@ -1,3 +1,0 @@
-/home/cassio/projects/BlogManagement/blogmanagement/build/src/CMakeFiles/blogmanagement.dir
-/home/cassio/projects/BlogManagement/blogmanagement/build/src/CMakeFiles/blogmanagement_automoc.dir
-/home/cassio/projects/BlogManagement/blogmanagement/build/CMakeFiles/uninstall.dir
