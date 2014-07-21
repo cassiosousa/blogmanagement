@@ -63,6 +63,7 @@ BlogManagement::BlogManagement()
     setupGUI();
     
     setupInitial();
+    loadBlogs();
 }
 
 BlogManagement::~BlogManagement()
@@ -148,6 +149,24 @@ QWidget* BlogManagement::createComments()
   return commentsWidget;
 }
 
-
+void BlogManagement::loadBlogs(){
+  
+//  BlogUtil blogUtil("http://www.cassiosousa.com.br/blog/xmlrpc.php","cassiosousa","");
+  
+  //map<int,string> blogs = blogUtil.getBlogs();
+  
+  int chave;
+  string valor;
+  
+  KComboBox *comboBlogs = new KComboBox( false, this);
+  
+  //for (map<int, string>::iterator it = blogs.begin(); it != blogs.end(); ++it) {
+ //     chave = it->first;
+ //     valor = it->second;
+      //comboBlogs->insertItem(chave, valor);
+ // }
+  comboBlogs->insertItem(3,"Teste");
+  this->toolPrincipal->addWidget(comboBlogs);
+}
 
 #include "blogmanagement.moc"
