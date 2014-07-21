@@ -39,5 +39,8 @@ isExecutable=false
 Install As Root=true
 Su Command=1
 
+[Project]
+VersionControlSupport=kdevgit
+
 [SourceFileTemplates]
 LastUsedTemplate=/home/cassio/.kde/share/apps/kdevfiletemplates/template_descriptions/cpp_basic.desktop

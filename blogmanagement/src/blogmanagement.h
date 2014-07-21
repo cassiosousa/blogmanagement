@@ -22,11 +22,17 @@
 
 
 #include <KXmlGuiWindow>
+
 #include "ui_mainwindow_base.h"
 #include "ui_prefs_base.h"
+#include "blogutil.h"
+
+#include <xmlrpc-c/base.hpp>
+#include <xmlrpc-c/client_simple.hpp>
 
 #include <KPageWidgetItem>
 #include <KPageWidgetModel>
+#include <KComboBox>
 #include <QWidget>
 
 #include <QScrollArea>
@@ -67,6 +73,7 @@ private:
     void setupActions();
     void setupInitial();
     QWidget* createComments();
+    void loadBlogs();
 private:
     Ui::prefs_base ui_prefs_base ;
 
