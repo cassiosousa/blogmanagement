@@ -194,6 +194,30 @@ void BlogManagement::settingsChanged(){
  */
 void BlogManagement::testConnection(){
   cout << "CHAMOU" << endl;
+  
+  QString blogURL = ui_prefs_base.kleBlogUrl->userText();
+  QString user = ui_prefs_base.kleUser->userText();
+  QString password = ui_prefs_base.klePassword->userText();
+  
+  BlogUtil blogUtil(blogURL.toStdString(),user.toStdString(),password.toStdString());
+  
+  try{
+    
+    blogUtil.getBlogs();
+  
+    ui_prefs_base.kled->setColor(QColor(0,255,0));
+  
+  }catch(exception& e){
+    
+    KMessageBox::error(
+      this,
+      QString::fromUtf8( e.what(), strlen(e.what()) ),
+      ki18n("Connection Failure").toString()//,
+      //KMessageBox::Option::Dangerous
+    );
+    ui_prefs_base.kled->setColor(QColor(255,0,0));
+  }
+  
   emit signalChangeStatusbar( i18n("Settings changed") );
 }
   

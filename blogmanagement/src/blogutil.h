@@ -26,6 +26,7 @@ private:
     string password;
     
     xmlrpc_c::value call(xmlrpc_c::paramList param, string operation);
+    
 };
 
 #endif	/* BLOGUTIL_H */

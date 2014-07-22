@@ -34,6 +34,7 @@
 #include <KPageWidgetModel>
 #include <KComboBox>
 #include <QWidget>
+#include <KMessageBox>
 
 #include <QScrollArea>
 //#include "ui_mainwindow_base.h"

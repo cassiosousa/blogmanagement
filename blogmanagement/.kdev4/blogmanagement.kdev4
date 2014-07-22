@@ -7,7 +7,7 @@ Current Build Directory Index=0
 ProjectRootRelative=./
 
 [CMake][CMake Build Directory 0]
-Build Directory Path=file:///home/cassio/projects/BlogManagement/blogmanagement/build
+Build Directory Path=file:///home/cassio/projects/blogmanagement.git/blogmanagement/build
 Build Type=Debug
 CMake Binary=file:///usr/bin/cmake
 Environment Profile=

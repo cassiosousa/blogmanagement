@@ -6,6 +6,10 @@ find_package(KDE4 REQUIRED)
 
 find_package(XMLRPC REQUIRED c++2)
 
+message("ENABLE EXCEPTIONS")
+
+add_definitions("-fexceptions")
+
 include (KDE4Defaults)
 #include (FindXMLRPC)
 
