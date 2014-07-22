@@ -4,17 +4,17 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="blogmanagementrc"/>
-  <group name="Preferences">
+  <group name="Connection Information">
     <entry name="col_background" type="Color">
-	    <label>color of the background</label>
-	    <default>black</default>
+	    <label>Blog URL</label>
+	    <default></default>
     </entry>
     <entry name="col_foreground" type="Color">
-	    <label>color of the foreground</label>
-	    <default>yellow</default>
+	    <label>User</label>
+	    <default>t</default>
     </entry>
     <entry name="val_time" type="Int">
-	    <label>size of a ball</label>
+	    <label>Password</label>
 	    <default>2</default>
     </entry>
   </group>

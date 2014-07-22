@@ -104,10 +104,18 @@ void BlogManagement::optionsPreferences()
         return;
     }
     KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
-    QWidget *generalSettingsDlg = new QWidget;
-    ui_prefs_base.setupUi(generalSettingsDlg);
-    dialog->addPage(generalSettingsDlg, i18n("General"), "package_setting");
+    dialog->setModal(true);
+    QWidget *conInfoSettingsDlg = new QWidget;
+    ui_prefs_base.setupUi(conInfoSettingsDlg);
+    dialog->addPage(conInfoSettingsDlg, i18n("Connection Information"), "package_setting");
     //connect(dialog, SIGNAL(settingsChanged(QString)), m_view, SLOT(settingsChanged()));
+    connect(dialog, SIGNAL( settingsChanged(QString)),this, SLOT(settingsChanged()) );
+    
+    ui_prefs_base.kleUser->setText("TESTE");
+    
+    //action for test connection with blog
+    connect(ui_prefs_base.kpbTestConnection, SIGNAL(clicked(bool)), this, SLOT(testConnection()) );
+    
     dialog->setAttribute( Qt::WA_DeleteOnClose );
     dialog->show();
 }
@@ -149,24 +157,44 @@ QWidget* BlogManagement::createComments()
   return commentsWidget;
 }
 
+/**
+ * load blogs from connection and show combo, on toolbar
+ */
 void BlogManagement::loadBlogs(){
   
-//  BlogUtil blogUtil("http://www.cassiosousa.com.br/blog/xmlrpc.php","cassiosousa","");
+  BlogUtil blogUtil("http://www.cassiosousa.com.br/blog/xmlrpc.php","cassiosousa","");
   
-  //map<int,string> blogs = blogUtil.getBlogs();
+  map<unsigned int,string> blogs = blogUtil.getBlogs();
   
-  int chave;
-  string valor;
+  QString newValue;
   
   KComboBox *comboBlogs = new KComboBox( false, this);
   
-  //for (map<int, string>::iterator it = blogs.begin(); it != blogs.end(); ++it) {
- //     chave = it->first;
- //     valor = it->second;
-      //comboBlogs->insertItem(chave, valor);
- // }
-  comboBlogs->insertItem(3,"Teste");
+  for (map<unsigned int, string>::iterator it = blogs.begin(); it != blogs.end(); ++it) {
+     
+      newValue = QString::fromUtf8( it->second.c_str(), it->second.length() );
+      
+      //verify exists apostrophe in html and replace for '
+      if(newValue.contains("&#039;"))
+	newValue = newValue.replace("&#039;","'");
+            
+      comboBlogs->insertItem(it->first, newValue);
+  }
+  
   this->toolPrincipal->addWidget(comboBlogs);
 }
 
+void BlogManagement::settingsChanged(){
+  cout << "CHAMOU" << endl;
+  emit signalChangeStatusbar( i18n("Settings changed") );
+}
+
+/**
+ * Method for test connection with blog
+ */
+void BlogManagement::testConnection(){
+  cout << "CHAMOU" << endl;
+  emit signalChangeStatusbar( i18n("Settings changed") );
+}
+  
 #include "blogmanagement.moc"

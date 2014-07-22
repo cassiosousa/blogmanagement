@@ -18,7 +18,7 @@ BlogUtil::BlogUtil(string blogUrl, string username, string password) {
 BlogUtil::~BlogUtil() {
 }
 
-map<int, string> BlogUtil::getBlogs() {
+map<unsigned int, string> BlogUtil::getBlogs() {
     
     xmlrpc_c::paramList parametros;
       
@@ -27,12 +27,12 @@ map<int, string> BlogUtil::getBlogs() {
     
     xmlrpc_c::value resultado = call(parametros, "wp.getUsersBlogs");
     
-    map<int, string> result;
+    map<unsigned int, string> result;
     
     xmlrpc_c::carray arr = xmlrpc_c::value_array(resultado).cvalue();
     xmlrpc_c::cstruct str;
     
-    int idBlog;
+    unsigned int idBlog;
     for(xmlrpc_c::carray::iterator it = arr.begin(); it != arr.end(); ++it){
         
         str = xmlrpc_c::value_struct( it->cValueP ).cvalue();        

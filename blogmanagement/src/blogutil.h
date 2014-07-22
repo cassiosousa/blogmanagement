@@ -19,7 +19,7 @@ public:
     BlogUtil(string blogUrl,string,string);
     virtual ~BlogUtil();
     
-    map<int,string> getBlogs();
+    map< unsigned int,string> getBlogs();
 private:
     string blogUrl;
     string username;

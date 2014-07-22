@@ -1,6 +1,6 @@
 set(blogmanagement_SRCS 
    utils.cpp
-#   blogutil.cpp
+   blogutil.cpp
    blogmanagement.cpp
    main.cpp   
  )
@@ -14,13 +14,13 @@ kde4_add_app_icon(blogmanagement_SRCS "hi*-app-krep.png" "hi*-app-comments.png" 
 
 kde4_add_executable(blogmanagement ${blogmanagement_SRCS})
 
-target_link_libraries(blogmanagement ${KDE4_KDEUI_LIBS} 
-/opt/xmlrpc/stable/src/cpp/libxmlrpc++.so
-/opt/xmlrpc/stable/src/cpp/libxmlrpc_packetsocket.so
-/opt/xmlrpc/stable/lib/expat/xmlparse/libxmlrpc_xmlparse.so
-/opt/xmlrpc/stable/lib/expat/xmltok/libxmlrpc_xmltok.so
-/opt/xmlrpc/stable/lib/libutil/libxmlrpc_util.so
-/opt/xmlrpc/stable/src/libxmlrpc.so -lxmlrpc++
+target_link_libraries(blogmanagement ${KDE4_KDEUI_LIBS} ${XMLRPC_LIBRARIES} xmlrpc_client++
+#/opt/xmlrpc/stable/src/cpp/libxmlrpc++.so
+#/opt/xmlrpc/stable/src/cpp/libxmlrpc_packetsocket.so
+#/opt/xmlrpc/stable/lib/expat/xmlparse/libxmlrpc_xmlparse.so
+#/opt/xmlrpc/stable/lib/expat/xmltok/libxmlrpc_xmltok.so
+#/opt/xmlrpc/stable/lib/libutil/libxmlrpc_util.so
+#/opt/xmlrpc/stable/src/libxmlrpc.so -lxmlrpc++
 )
 
 install(TARGETS blogmanagement ${INSTALL_TARGETS_DEFAULT_ARGS} )

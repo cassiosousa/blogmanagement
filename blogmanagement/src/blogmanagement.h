@@ -68,22 +68,32 @@ public:
 private slots:
     void fileNew();
     void optionsPreferences();
-
+    void settingsChanged();
+    void testConnection();
+    
 private:
     void setupActions();
     void setupInitial();
     QWidget* createComments();
     void loadBlogs();
-private:
-    Ui::prefs_base ui_prefs_base ;
 
-    QPrinter   *m_printer;
-    KToggleAction *m_toolbarAction;
-    KToggleAction *m_statusbarAction;
-    KPageWidgetModel *modelViewPages;
-    KPageWidgetItem *itemComments;
-    KPageWidgetItem *itemUsers;
-    QScrollArea *scrollAreaComments;
+    signals:
+  /**
+     * Use this signal to change the content of the statusbar
+     */
+    void signalChangeStatusbar(const QString& text);
+    
+private:
+    Ui::prefs_base 	ui_prefs_base ;
+
+    QPrinter   		*m_printer;
+    KToggleAction 	*m_toolbarAction;
+    KToggleAction 	*m_statusbarAction;
+    KPageWidgetModel 	*modelViewPages;
+    KPageWidgetItem 	*itemComments;
+    KPageWidgetItem 	*itemUsers;
+    QScrollArea 	*scrollAreaComments;
+    
 };
 
 #endif // _BLOGMANAGEMENT_H_
