@@ -4,16 +4,16 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="blogmanagementrc"/>
-  <group name="Connection Information">
-    <entry name="col_background" type="Color">
+  <group name="Preferences">
+    <entry name="kleBlogUrl" type="String">
 	    <label>Blog URL</label>
 	    <default></default>
     </entry>
-    <entry name="col_foreground" type="Color">
+    <entry name="kleUser" type="String">
 	    <label>User</label>
 	    <default>t</default>
     </entry>
-    <entry name="val_time" type="Int">
+    <entry name="klePassword" type="String">
 	    <label>Password</label>
 	    <default>2</default>
     </entry>

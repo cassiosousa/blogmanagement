@@ -13,7 +13,7 @@ add_definitions("-fexceptions")
 include (KDE4Defaults)
 #include (FindXMLRPC)
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 #add_subdirectory( doc )
 add_subdirectory( src )

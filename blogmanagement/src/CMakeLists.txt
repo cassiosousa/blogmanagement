@@ -3,6 +3,7 @@ set(blogmanagement_SRCS
    blogutil.cpp
    blogmanagement.cpp
    main.cpp   
+   settings.cpp
  )
 #blogmanagementview.cpp
 #blogmanagementview_base.ui

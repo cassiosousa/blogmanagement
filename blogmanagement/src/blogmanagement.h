@@ -79,7 +79,8 @@ private:
     void loadBlogs();
 
     signals:
-  /**
+      
+    /**
      * Use this signal to change the content of the statusbar
      */
     void signalChangeStatusbar(const QString& text);
@@ -94,6 +95,10 @@ private:
     KPageWidgetItem 	*itemComments;
     KPageWidgetItem 	*itemUsers;
     QScrollArea 	*scrollAreaComments;
+    
+    QString 		blogURL;
+    QString 		user;
+    QString 		password;
     
 };
 

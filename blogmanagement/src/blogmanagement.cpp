@@ -35,7 +35,7 @@
 
 #include <KLocale>
 #include <QVBoxLayout>
-
+//"http://www.cassiosousa.com.br/blog/xmlrpc.php"
 BlogManagement::BlogManagement()
     : KXmlGuiWindow(),
       
@@ -60,10 +60,9 @@ BlogManagement::BlogManagement()
     // It also applies the saved mainwindow settings, if any, and ask the
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
+    setupInitial();    
     setupGUI();
     
-    setupInitial();
-    loadBlogs();
 }
 
 BlogManagement::~BlogManagement()
@@ -73,7 +72,7 @@ BlogManagement::~BlogManagement()
 void BlogManagement::setupActions()
 {
     //KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
-   // KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+    KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 
     KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
@@ -99,7 +98,7 @@ void BlogManagement::optionsPreferences()
     //
     // compare the names of the widgets in the .ui file
     // to the names of the variables in the .kcfg file
-    //avoid to have 2 dialogs shown
+    //avoid to have 2 dialogs shown settings
     if ( KConfigDialog::showDialog( "settings" ) )  {
         return;
     }
@@ -107,39 +106,49 @@ void BlogManagement::optionsPreferences()
     dialog->setModal(true);
     QWidget *conInfoSettingsDlg = new QWidget;
     ui_prefs_base.setupUi(conInfoSettingsDlg);
-    dialog->addPage(conInfoSettingsDlg, i18n("Connection Information"), "package_setting");
+    dialog->addPage(conInfoSettingsDlg, i18n("Connection Information"), "preferences-system-network");
     //connect(dialog, SIGNAL(settingsChanged(QString)), m_view, SLOT(settingsChanged()));
-    connect(dialog, SIGNAL( settingsChanged(QString)),this, SLOT(settingsChanged()) );
-    
-    ui_prefs_base.kleUser->setText("TESTE");
-    
-    //action for test connection with blog
+    connect(dialog, SIGNAL( settingsChanged(const QString&)),this, SLOT(settingsChanged()) );
+   
+    //action for test connection with blog    
     connect(ui_prefs_base.kpbTestConnection, SIGNAL(clicked(bool)), this, SLOT(testConnection()) );
     
     dialog->setAttribute( Qt::WA_DeleteOnClose );
     dialog->show();
+    
 }
 
 void BlogManagement::setupInitial()
-{
-  //show toolPrincipal
-  toolPrincipal->show();
+{  
+  blogURL = Settings::kleBlogUrl(); //ui_prefs_base.kcfg_kleBlogUrl->userText();
+  user = Settings::kleUser();//ui_prefs_base.kcfg_kleUser->userText();
+  password = Settings::klePassword();//ui_prefs_base.kcfg_klePassword->userText();
   
+  if(!blogURL.isEmpty() && !user.isEmpty()){
+    //show toolPrincipal
+    toolPrincipal->show();
     
-  itemComments = new KPageWidgetItem(createComments(),ki18n("Comments").toString());
-  itemComments->setIcon(KIcon("comments"));
-  itemComments->setHeader(ki18n("Comments").toString());
+      
+    itemComments = new KPageWidgetItem(createComments(),ki18n("Comments").toString());
+    itemComments->setIcon(KIcon("comments"));
+    itemComments->setHeader(ki18n("Comments").toString());
+    
+    itemUsers = new KPageWidgetItem(createComments(),ki18n("Users").toString());
+    itemUsers->setIcon(KIcon("userbl"));
+    itemUsers->setHeader(ki18n("User").toString());
+    
+    modelViewPages = new KPageWidgetModel(this);
+    modelViewPages->addPage(itemComments);
+    modelViewPages->addPage(itemUsers);
+    
+    kpageview->setModel(modelViewPages);  
   
-  itemUsers = new KPageWidgetItem(createComments(),ki18n("Users").toString());
-  itemUsers->setIcon(KIcon("userbl"));
-  itemUsers->setHeader(ki18n("User").toString());
-  
-  modelViewPages = new KPageWidgetModel(this);
-  modelViewPages->addPage(itemComments);
-  modelViewPages->addPage(itemUsers);
-  
-  kpageview->setModel(modelViewPages);
-  
+    try{
+      loadBlogs();
+    }catch(exception& e){
+      e.what();
+    }
+  }//end if
 }
 
 QWidget* BlogManagement::createComments()
@@ -162,7 +171,7 @@ QWidget* BlogManagement::createComments()
  */
 void BlogManagement::loadBlogs(){
   
-  BlogUtil blogUtil("http://www.cassiosousa.com.br/blog/xmlrpc.php","cassiosousa","");
+  BlogUtil blogUtil(blogURL.toStdString(),user.toStdString(),password.toStdString());
   
   map<unsigned int,string> blogs = blogUtil.getBlogs();
   
@@ -185,7 +194,9 @@ void BlogManagement::loadBlogs(){
 }
 
 void BlogManagement::settingsChanged(){
-  cout << "CHAMOU" << endl;
+  cout << "CHAMOU SETTINGS" << endl;
+ // Settings::kleBlogUrl().append(ui_prefs_base.kleBlogUrl->userText());
+ this->setupInitial();
   emit signalChangeStatusbar( i18n("Settings changed") );
 }
 
@@ -195,11 +206,7 @@ void BlogManagement::settingsChanged(){
 void BlogManagement::testConnection(){
   cout << "CHAMOU" << endl;
   
-  QString blogURL = ui_prefs_base.kleBlogUrl->userText();
-  QString user = ui_prefs_base.kleUser->userText();
-  QString password = ui_prefs_base.klePassword->userText();
-  
-  BlogUtil blogUtil(blogURL.toStdString(),user.toStdString(),password.toStdString());
+  BlogUtil blogUtil(Settings::kleBlogUrl().toStdString(),Settings::kleUser().toStdString(),Settings::klePassword().toStdString());
   
   try{
     
